@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include european_banking_integration *.css
+recursive-include european_banking_integration *.csv
+recursive-include european_banking_integration *.html
+recursive-include european_banking_integration *.ico
+recursive-include european_banking_integration *.js
+recursive-include european_banking_integration *.json
+recursive-include european_banking_integration *.md
+recursive-include european_banking_integration *.png
+recursive-include european_banking_integration *.py
+recursive-include european_banking_integration *.svg
+recursive-include european_banking_integration *.txt
+recursive-exclude european_banking_integration *.pyc
