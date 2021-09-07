@@ -1,8 +1,8 @@
 import csv
-
 class Reader:
-	def __init__(self, path):
-		self.path =  path
+
+	def __init__(self, handler):
+		self.handler = handler 
 		self.headers = []
 		self._set_headers()
 
@@ -13,7 +13,7 @@ class Reader:
 		return self.headers
 
 	def read(self):
-		for row in open(self.path, 'r'):
+		for row in self.handler:
 			yield row
 
 	def next(self):
