@@ -1,6 +1,6 @@
 import csv
-class Reader:
 
+class Reader:
 	def __init__(self, handler):
 		self.handler = handler 
 		self.headers = []
@@ -18,7 +18,7 @@ class Reader:
 
 	def next(self):
 		return next(self.read())
-	
+
 	def _skipFirstRow(self):
 		self.next()
 
