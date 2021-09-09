@@ -5,3 +5,6 @@ from european_banking_integration.utils import get_file_path, get_party, get_pai
 from os import path
 from european_banking_integration.reader import Reader
 from european_banking_integration.transformer import Kreissparkasse_transformer
+
+	file_path  = get_file_path(doc.import_file)
+
