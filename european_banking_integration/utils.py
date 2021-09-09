@@ -45,13 +45,13 @@ def account_paid_to(company):
 	return frappe.db.get_list('Account', filters=filters)
 
 
-def get_party(doc):
-	supplier = find_supplier(doc.iban)
-	customer = find_customer(doc.iban)
+def get_party(iban):
+	supplier = find_supplier(iban)
+	customer = find_customer(iban)
 
 	if supplier:
 		return ['Supplier', supplier.name, supplier.name ]
-	elif customer(doc.iban):
+	elif customer:
 		return ['Customer',  customer.name, customer.name]
 	else:
 		return [False, False, False]
