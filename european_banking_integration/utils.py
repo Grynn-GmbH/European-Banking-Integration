@@ -1,4 +1,11 @@
 import frappe
+from os import path
+
+
+def get_file_path(location):
+	site_path = frappe.get_site_path()
+	print(site_path)
+	return site_path + location
 
 def find_supplier(iban):
 	bank_account = frappe.get_list(
