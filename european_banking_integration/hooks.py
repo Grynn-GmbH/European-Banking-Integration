@@ -93,7 +93,7 @@ app_license = "GPL V3"
 
 doc_events = {
 	"European Bank Import": {
-		"on_submit": "european_banking_integration.european_banking_integration.import_statement.statement_update"
+		"on_submit": "european_banking_integration.import_statement.statement_update"
 	}
 }
 
