@@ -48,11 +48,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:!doc.__islocal",
    "fieldname": "import_file",
    "fieldtype": "Attach",
    "in_list_view": 1,
-   "label": "Import File"
+   "label": "Import File",
+   "reqd": 1
   },
   {
    "default": "Pending",
@@ -86,7 +86,7 @@
  "hide_toolbar": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-08 02:46:52.375813",
+ "modified": "2021-09-09 00:16:55.705830",
  "modified_by": "Administrator",
  "module": "European Banking Integration",
  "name": "European Bank Import",
