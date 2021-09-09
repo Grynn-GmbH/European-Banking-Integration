@@ -13,7 +13,7 @@ class Reader:
 		return self.headers
 
 	def read(self):
-		for row in self.handler:
+		for row in csv.reader(self.handler):
 			yield row
 
 	def next(self):
