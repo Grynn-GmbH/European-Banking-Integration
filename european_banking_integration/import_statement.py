@@ -8,3 +8,6 @@ from european_banking_integration.transformer import Kreissparkasse_transformer
 
 	file_path  = get_file_path(doc.import_file)
 
+	if not (file_path.endswith('.csv') or file_path.endswith('xlsx')):
+		frappe.throw('Requires CSV File')
+		return
