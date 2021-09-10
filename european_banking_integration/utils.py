@@ -47,7 +47,7 @@ def account_paid_to(company):
 	filters = [
 		["company", "=", company],
 		["is_group", "=", 0],
-		["account_type", "in", ["bank", "Payable"]]
+		["account_type", "in", ["Bank", "Cash"]]
 	]
 	return frappe.db.get_list('Account', filters=filters)
 
