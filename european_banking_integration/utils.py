@@ -7,26 +7,15 @@ def get_file_path(location):
 	print(site_path)
 	return site_path + location
 
-def find_supplier(iban):
+def find_party(iban):
 	bank_account = frappe.get_list(
-		'Bank Account', filters=[['iban', '=', iban], ["party_type", "=", "Supplier"]])
+		'Bank Account', filters=[['iban', '=', iban]])
 		
 	if len(bank_account) > 0:
-		return frappe.get_doc('Bank Account', bank_account[0])
+		party = frappe.get_doc('Bank Account', bank_account[0])
+		return [party.party_type, party.party, party.party]
 	else:
-		return False
-
-def find_customer(iban):
-	"""
-	Find Supplier
-	
-	"""
-	bank_account = frappe.get_list('Bank Account', filters=[['iban', '=', iban], ["party_type", "=", "Customer"]])	
-
-	if len(bank_account) > 0:
-		return frappe.get_doc('Bank Account', bank_account[0])
-	else:
-		return False
+		return [False, False, False]
 
 def find_company(iban):
 	[company] = frappe.get_list('Bank Account', filters=[['iban', '=', iban], ["is_company_account", "=", 1]], fields=['company'])	
