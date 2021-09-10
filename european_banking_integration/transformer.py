@@ -8,6 +8,7 @@ def Kreissparkasse_transformer(row):
 		'bank_code': row[7],
 		'comments': row[4],
 		'payer': row[5],
+		'reference': "{}\n{}\n{}".format(row[3], row[4], row[5]),
 		'reference_date': create_date(row[2]),
 	}
 
