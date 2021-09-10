@@ -56,13 +56,6 @@ def make_payment_entry(amount, dt, iban, reference, company):
 
 	# Amount (amount)
 
-	print(amount,
-				paid_from, 
-				paid_to, 
-				party_type, 
-				party, 
-				party_name, 
-				party_type)
 
 
 	
