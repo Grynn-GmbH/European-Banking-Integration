@@ -13,7 +13,7 @@
   "column_break_4",
   "import_file",
   "status",
-  "import_type",
+  "submit_after_import",
   "amended_from"
  ],
  "fields": [
@@ -64,14 +64,10 @@
    "read_only": 1
   },
   {
-   "default": "Insert New Records",
-   "fieldname": "import_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Import Type",
-   "options": "\nInsert New Records\nUpdate Existing Records",
-   "reqd": 1,
-   "set_only_once": 1
+   "default": "0",
+   "fieldname": "submit_after_import",
+   "fieldtype": "Check",
+   "label": "Submit After Import"
   },
   {
    "fieldname": "amended_from",
@@ -86,7 +82,7 @@
  "hide_toolbar": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-09 00:16:55.705830",
+ "modified": "2021-09-10 05:22:43.625284",
  "modified_by": "Administrator",
  "module": "European Banking Integration",
  "name": "European Bank Import",
