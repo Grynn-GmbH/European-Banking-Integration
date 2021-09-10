@@ -59,7 +59,7 @@ app_license = "GPL V3"
 # ------------
 
 # before_install = "european_banking_integration.install.before_install"
-# after_install = "european_banking_integration.install.after_install"
+after_install = "european_banking_integration.setup.install.on_install"
 
 # Desk Notifications
 # ------------------
