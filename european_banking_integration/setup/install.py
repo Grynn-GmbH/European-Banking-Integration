@@ -10,10 +10,12 @@ def on_install():
 	supplier.supplier_name = 'Temp Supplier'
 	supplier.supplier_group = 'All Supplier Groups'
 	supplier.insert()
+	supplier.save()
 	
 
 	# Create Customer
 	customer = frappe.new_doc('Customer')
 	customer.full_name = 'Temp Customer'
 	customer.insert()
-	pass
+	customer.save()
+	
