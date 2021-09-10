@@ -1,10 +1,13 @@
-import frappe
 import csv
-from frappe.utils import get_site_name
-from european_banking_integration.utils import get_file_path, get_party, get_paid_from, account_paid_to
 from os import path
+
+import frappe
+from frappe.utils import get_site_name
+
 from european_banking_integration.reader import Reader
 from european_banking_integration.transformer import Kreissparkasse_transformer
+from european_banking_integration.utils import (account_paid_to, get_file_path,
+                                                get_paid_from, get_party)
 
 def statement_update(doc, event=None):
 
@@ -78,8 +81,9 @@ def make_payment_entry(amount, dt, iban, reference, company, paid_from):
 	
 	# Insert Payment Entry
 	payment_entry.insert()
-	
-	# payment_entry.submit()
+
+	if not(party_name == 'Temp Supplier' or party_name == 'Temp Customer'):
+		payment_entry.submit()
 
 
 	
