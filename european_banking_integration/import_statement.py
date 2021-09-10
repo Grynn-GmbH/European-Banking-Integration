@@ -17,16 +17,20 @@ def statement_update(doc, event=None):
 		frappe.throw('Requires CSV File')
 		return
 	paid_from = frappe.get_doc('Bank Account', doc.bank_account).account		
+	paid_from_currency = frappe.get_doc('Account', paid_from).account_currency
+
+	submit_after_save = doc.submit_after_import
+
 	with open(file_path, 'r') as f:
 		uploaded_file = Reader(f)
 
 		for row in uploaded_file.read():
 			data = Kreissparkasse_transformer(row)	
 
-			make_payment_entry(data['amount'], data['reference_date'], data['iban'], 'hi', doc.company, paid_from)
+			make_payment_entry(data['amount'], data['reference_date'], data['iban'], data['reference'], doc.company, paid_from, submit_after_save, data['booking_date'], paid_from_currency)
 
 
-def make_payment_entry(amount, dt, iban, reference, company, paid_from):
+def make_payment_entry(amount, dt, iban, reference, company, paid_from, submit_after_import, reference_date, paid_from_currency):
 
 	# Payment Type
 	if amount < 0:
@@ -51,27 +55,23 @@ def make_payment_entry(amount, dt, iban, reference, company, paid_from):
 
 	paid_to = account_paid_to(company)
 
-	# Amount (amount)
-
 	payment_entry = frappe.new_doc('Payment Entry')
 	payment_entry.payment_type = payment_type
 	payment_entry.company = company
-	# payment_entry.posting_date = dt
+	payment_entry.posting_date = dt
 	
 	payment_entry.party_type = party_type
 	payment_entry.party = party
 	payment_entry.party_name = party_name
 	payment_entry.paid_from = paid_from
+	payment_entry.custom_remarks = 1
 
-	# TODO: Make Reference No
-	payment_entry.reference_no = 'xyz',
-	payment_entry.reference_date = '2021-09-10'
+	payment_entry.reference_no = reference,
+	payment_entry.reference_date = reference_date
 
-	# TODO: Make Currency Dynamic
-	# payment_entry.paid_from_account_currency = 'CHF'
+	payment_entry.paid_from_account_currency = paid_from_currency 
 	payment_entry.paid_to = paid_to[0].name
 
-	# TODO: Make Currency Dynamic
 	# payment_entry.paid_to_account_currency = 'CHF'
 	payment_entry.paid_amount = abs(amount)
 	payment_entry.received_amount = abs(amount)
@@ -82,7 +82,7 @@ def make_payment_entry(amount, dt, iban, reference, company, paid_from):
 	# Insert Payment Entry
 	payment_entry.insert()
 
-	if not(party_name == 'Temp Supplier' or party_name == 'Temp Customer'):
+	if (not(party_name == 'Temp Supplier' or party_name == 'Temp Customer')) and submit_after_import:
 		payment_entry.submit()
 
 
