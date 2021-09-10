@@ -33,29 +33,53 @@ def make_payment_entry(amount, dt, iban, reference, company):
 	else:
 		return
 
-	# Company (company)
-
-	# Posting Date (dt)
-
-	# party Type
-
-	[party_type, party, party_name] = get_party(iban)
+	[party_type, party, party_name] = get_party(iban, payment_type)
 
 	if not party_type:
-		return
-
-	# Paid From
-
-	paid_from = get_paid_from(company)
-
-	# Currency
-
-	# Paid to
+		if payment_type == 'Pay':
+			party_type = 'Supplier'
+			party_name = 'Temp Supplier'
+			party = 'Temp Supplier'
+		else:
+			party_type = 'Customer'
+			party_name = 'Temp Customer'
+			party = 'Temp Customer'
+		
 
 	paid_to = account_paid_to(company)
 
 	# Amount (amount)
 
+	payment_entry = frappe.new_doc('Payment Entry')
+	payment_entry.payment_type = payment_type
+	payment_entry.company = company
+	# payment_entry.posting_date = dt
+	
+	payment_entry.party_type = party_type
+	payment_entry.party = party
+	payment_entry.party_name = party_name
+	payment_entry.paid_from = paid_from
+
+	# TODO: Make Reference No
+	payment_entry.reference_no = 'xyz',
+	payment_entry.reference_date = '2021-09-10'
+
+	# TODO: Make Currency Dynamic
+	# payment_entry.paid_from_account_currency = 'CHF'
+	payment_entry.paid_to = paid_to[0].name
+
+	# TODO: Make Currency Dynamic
+	# payment_entry.paid_to_account_currency = 'CHF'
+	payment_entry.paid_amount = abs(amount)
+	payment_entry.received_amount = abs(amount)
+
+	# Fraape Commit Message
+	frappe.db.commit()
+	
+	# Insert Payment Entry
+	payment_entry.insert()
+	
+	# payment_entry.submit()
 
 
 	
