@@ -34,12 +34,12 @@ def find_company(iban):
 
 
 def get_paid_from(company):
+
 	filters = [
 		["company", "=", company],
 		["is_group", "=", 0],
 		["account_type", "=", "Payable"]
 	]
-
 	return frappe.db.get_list('Account', filters=filters)
 	
 
