@@ -13,17 +13,17 @@ def statement_update(doc, event=None):
 	if not (file_path.endswith('.csv') or file_path.endswith('xlsx')):
 		frappe.throw('Requires CSV File')
 		return
-	
+	paid_from = frappe.get_doc('Bank Account', doc.bank_account).account		
 	with open(file_path, 'r') as f:
 		uploaded_file = Reader(f)
 
 		for row in uploaded_file.read():
 			data = Kreissparkasse_transformer(row)	
 
-			make_payment_entry(data['amount'], data['reference_date'], data['iban'], 'hi', doc.company)
+			make_payment_entry(data['amount'], data['reference_date'], data['iban'], 'hi', doc.company, paid_from)
 
 
-def make_payment_entry(amount, dt, iban, reference, company):
+def make_payment_entry(amount, dt, iban, reference, company, paid_from):
 
 	# Payment Type
 	if amount < 0:
