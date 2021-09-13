@@ -20,4 +20,9 @@ def create_amount(amount):
 		return float('.'.join(amount.split(',')))
 
 def create_date(date):
-	return '-'.join(date.split('.'))
+	dt = date.split('.')
+	month = dt[1]
+	day = dt[0]
+	year = "20{}".format(dt[2])
+	ref_dt = "{}-{}-{}".format(year, month, day)
+	return ref_dt
