@@ -66,7 +66,8 @@ def make_payment_entry(amount, dt, iban, reference, company, paid_from, submit_a
 	payment_entry.paid_from = paid_from
 	payment_entry.custom_remarks = 1
 
-	payment_entry.reference_no = reference,
+	payment_entry.remarks = reference,
+	payment_entry.reference_no = iban,
 	payment_entry.reference_date = reference_date
 
 	payment_entry.paid_from_account_currency = paid_from_currency 
