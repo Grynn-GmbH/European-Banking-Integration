@@ -15,7 +15,10 @@ def on_install():
 
 	# Create Customer
 	customer = frappe.new_doc('Customer')
-	customer.full_name = 'Temp Customer'
+	customer.customer_name = 'Temp Customer'
+	customer.customer_group = 'All Customer Groups'
+	customer.territory = 'All Territories'
 	customer.insert()
 	customer.save()
+
 	
