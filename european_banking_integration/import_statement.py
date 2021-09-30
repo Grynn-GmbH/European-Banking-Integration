@@ -51,7 +51,6 @@ def make_payment_entry(amount, dt, iban, reference, company, paid_from, submit_a
 			party_type = 'Customer'
 			party_name = 'Temp Customer'
 			party = 'Temp Customer'
-		
 
 	paid_to = account_paid_to(company)
 
@@ -79,8 +78,7 @@ def make_payment_entry(amount, dt, iban, reference, company, paid_from, submit_a
 
 	# Fraape Commit Message
 	frappe.db.commit()
-	
-	# Insert Payment Entry
+
 	payment_entry.insert()
 
 	if (not(party_name == 'Temp Supplier' or party_name == 'Temp Customer')) and submit_after_import:
